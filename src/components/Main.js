@@ -5,11 +5,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Header extends React.Component {
-	
 	constructor(props) {
     super(props);
   }
-
 	render() {
 		return (
 			<div className="header">
@@ -21,16 +19,11 @@ class Header extends React.Component {
 Header.propTypes = {
 	title: PropTypes.string.isRequired
 }
-Header.defaultProps = {
-	title: 'Scoreboard'
-};
 
 class Counter extends React.Component {
-
 	constructor(props) {
     super(props);
   }
-
 	render() {
 		return (
 			<div className="counter">
@@ -44,17 +37,14 @@ class Counter extends React.Component {
 Counter.propTypes = {
 	score: PropTypes.number.isRequired
 }
-
 Counter.defaultProps = {
 	score: 0
 };
 
 class Player extends React.Component {
-
 	constructor(props) {
     super(props);
   }
-
 	render() {
 		return (
 			<div className="player">
@@ -78,26 +68,31 @@ Player.defaultProps = {
 };
 
 class AppComponent extends React.Component {
-	
 	constructor(props) {
     super(props);
   }
-
   render() {
     return (
     	<div className="scoreboard">
-    		<Header title="Nick's Scoreboard" />
+    		<Header title={this.props.title} />
 		    <div className="players">
-		    	<Player name="Nick Ocampo" score={31} />
-		    	<Player name="Alex Montague" score={28} />
+		    	{this.props.players.map(function (player) {
+		    		return <Player name={player.name} score={player.score} />
+		    	})}
 		    </div>
 		  </div>
     );
   }
 }
 AppComponent.propTypes = {
+	title: PropTypes.string.isRequired,
+	players: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		score: PropTypes.number.isRequired
+	})).isRequired
 }
 AppComponent.defaultProps = {
+	title: 'Scoreboard'
 };
 
 export default AppComponent;
