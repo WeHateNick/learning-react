@@ -2,6 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class AppComponent extends React.Component {
 	
@@ -52,10 +53,11 @@ class AppComponent extends React.Component {
 }
 
 AppComponent.propTypes = {
-	title: Prototypes.string.isRequired
+	title: PropTypes.string.isRequired
 }
 
 AppComponent.defaultProps = {
+	title: 'Scoreboard'
 };
 
 export default AppComponent;
