@@ -7,11 +7,13 @@ import App from './components/Main';
 var PLAYERS = [
 	{
 		name: 'Nick Ocampo',
-		score: 31
+		score: 31,
+		id: 1
 	},
 	{
 		name: 'Alex Montague',
-		score: 28
+		score: 28,
+		id: 2
 	}
 ];
 

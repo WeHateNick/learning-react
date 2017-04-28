@@ -23,23 +23,31 @@ Header.propTypes = {
 class Counter extends React.Component {
 	constructor(props) {
     super(props);
+    this.state = {
+    	score: 0
+    }
+    this.incrementScore = () => {
+    	this.setState({
+    		score: (this.state.score + 1)
+    	})
+    }
+    this.decrementScore = () => {
+    	this.setState({
+    		score: (this.state.score - 1)
+    	})
+    }
   }
 	render() {
 		return (
 			<div className="counter">
-				<button className="counter-action decrement"> - </button>
-				<div className="counter-score"> {this.props.score} </div>
-				<button className="counter-action increment"> + </button>
+				<button className="counter-action decrement" onClick={this.decrementScore}> - </button>
+				<div className="counter-score"> {this.state.score} </div>
+				<button className="counter-action increment" onClick={this.incrementScore}> + </button>
 			</div>
 		)
 	}
 }
-Counter.propTypes = {
-	score: PropTypes.number.isRequired
-}
-Counter.defaultProps = {
-	score: 0
-};
+Counter.propTypes = {}
 
 class Player extends React.Component {
 	constructor(props) {
@@ -52,7 +60,7 @@ class Player extends React.Component {
     			{this.props.name}
     		</div>
     		<div className="player-score">
-    			<Counter score={this.props.score} />
+    			<Counter />
     		</div>
     	</div>
 		)
@@ -63,7 +71,6 @@ Player.propTypes = {
 	score: PropTypes.number.isRequired
 }
 Player.defaultProps = {
-	// name: 'Player 1',
 	score: 0
 };
 
@@ -77,7 +84,7 @@ class AppComponent extends React.Component {
     		<Header title={this.props.title} />
 		    <div className="players">
 		    	{this.props.players.map(function (player) {
-		    		return <Player name={player.name} score={player.score} />
+		    		return <Player name={player.name} score={player.score} key={player.id} />
 		    	})}
 		    </div>
 		  </div>
@@ -88,6 +95,7 @@ AppComponent.propTypes = {
 	title: PropTypes.string.isRequired,
 	players: PropTypes.arrayOf(PropTypes.shape({
 		name: PropTypes.string.isRequired,
+		score: PropTypes.number.isRequired,
 		score: PropTypes.number.isRequired
 	})).isRequired
 }
